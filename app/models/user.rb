@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+
+  include ActiveModel::Validations
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,
@@ -12,6 +14,7 @@ class User < ApplicationRecord
   validates :address, presence: true
   validates :birthdate, presence: true
   validates :toc, presence: true, acceptance: true
+  validates :password, password_strength: true
 
   scope :confirmed, -> { where.not(confirmed_at: nil) }
 

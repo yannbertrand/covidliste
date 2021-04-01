@@ -134,6 +134,8 @@ fr:
       present: doit être vide
       required: doit exister
       taken: n'est pas disponible
+      password:
+        password_strength: "pas assez robuste"
       too_long:
         one: est trop long (pas plus d'un caractère)
         other: est trop long (pas plus de %{count} caractères)

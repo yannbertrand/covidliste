@@ -36,6 +36,7 @@ gem 'bootstrap', '~> 5.0.0.beta2'
 gem 'letter_opener', '~> 1.7'
 gem 'letter_opener_web', '~> 1.4'
 gem 'devise'
+gem 'strong_password', '~> 0.0.8'
 
 group :development, :test do
   gem 'pry-byebug'
