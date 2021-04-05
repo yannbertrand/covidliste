@@ -16,6 +16,8 @@ class VaccinationCenter < ApplicationRecord
   has_many :partner, through: :partner_vaccination_center
   belongs_to :confirmer, class_name: 'User', optional: true
 
+  has_many :campaigns
+
   scope :confirmed, -> { where.not(confirmed_at: nil) }
 
   def confirmed?
