@@ -8,6 +8,9 @@
     %meta{content: "width=device-width, initial-scale=1, shrink-to-fit=no", name: "viewport"}
     = yield :append_to_head
     = stylesheet_link_tag "application", media: "all", "data-turbolinks-track": "reload"
+    / TODO BEFORE MERGING : Move the fonts to local resources
+    %link{:href => "https://fonts.gstatic.com", :rel => "preconnect"}
+    %link{:href => "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap", :rel => "stylesheet"}
     = javascript_pack_tag "application", "data-turbolinks-track": "reload", defer: true, nonce: true
   %body
     = render "layouts/navbar"
