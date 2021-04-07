@@ -73,6 +73,9 @@ group :development do
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
   gem "rack-mini-profiler", "~> 2.0"
   gem "listen", "~> 3.3"
+  gem "guard", "~> 2.16"
+  gem "guard-livereload", "~> 2.5", require: false
+  gem "rack-livereload", "~> 0.3.17"
 end
 
 group :test do
