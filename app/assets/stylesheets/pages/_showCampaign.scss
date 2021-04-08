@@ -1,0 +1,68 @@
+.showCampaign {
+  &__indicators {
+    display: flex;
+    gap: 20px;
+  }
+  &__indicator {
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 0 18px 0 rgba(198, 198, 198, 0.5);
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+    &__icon {
+      border-radius: 8px;
+      background-color: #ffffff;
+      box-shadow: 0 0 18px 0 rgba(198, 198, 198, 0.5);
+      padding: 12px;
+      i {
+        font-size: 20px;
+        color: $purple500;
+      }
+    }
+    &--number {
+      em {
+        font-style: normal;
+        font-size: 24px;
+        color: $purple500;
+      }
+      font-size: 12px;
+      font-weight: bold;
+      line-height: 18px;
+      p {
+        margin-bottom: 0;
+        align-self: center;
+      }
+    }
+    &--progress {
+      // flex-grow: 1;
+    }
+  }
+  &__progressLabel {
+    em {
+      font-style: normal;
+      font-size: 24px;
+      color: $purple500;
+    }
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 18px;
+  }
+  &__progress {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-grow: 1;
+    .progress {
+      height: 16px;
+      display: flex;
+      align-items: center;
+      padding: 0 4px;
+      width: 100%;
+      .progress-bar {
+        border-radius: 8px;
+        height: 10px;
+      }
+    }
+  }
+}

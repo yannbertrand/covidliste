@@ -16,4 +16,12 @@
       fill: $purple500;
     }
   }
+  &__category {
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    line-height: 0.5;
+    font-size: 16px;
+    color: $purple500;
+  }
 }

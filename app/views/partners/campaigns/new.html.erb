@@ -43,7 +43,7 @@
               <span class="form-sublabel">Nous vous invitons à respecter au maximum le calendrier vaccinal mis en place par le gouvernement</span>
             </p>
             <div class="newCampaign__timeRange__row">
-              <p class="form-label">De</p>
+              <p class="form-label">de</p>
               <%= f.input :min_age, as: :string, label: false, input_html: { min: "1", max: "130" } %>
               <p class="form-label">à</p>
               <%= f.input :max_age, as: :string, label: false, input_html: { min: "1", max: "130" } %>
@@ -52,7 +52,7 @@
           </div>
           <div class="newCampaign__timeRange newCampaign__timeRange__age">
             <p class="form-label">Distance maximum du volontaire par rapport au centre de vaccination <br>
-              <span class="form-sublabel">Dans le but de lui permettre une plus grande réactivité</span>
+              <%# <span class="form-sublabel">Dans le but de lui permettre une plus grande réactivité</span> %>
             </p>
             <div class="newCampaign__timeRange__row">
               <%= f.input :max_distance_in_meters, as: :string, label: false, input_html: { min: "1" } %>
