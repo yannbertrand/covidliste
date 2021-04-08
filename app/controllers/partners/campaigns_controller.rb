@@ -19,12 +19,18 @@ module Partners
     end
 
     def new
-      @campaign = @vaccination_center.campaigns.build(ends_at: 1.hour.from_now)
+      @campaign = @vaccination_center.campaigns.build(ends_at: 1.hour.from_now, min_age: 70, max_age: 95, max_distance_in_meters: 10, available_doses: 50, vaccine_type: "Pfizer")
+      @initial_estimate = @vaccination_center.reachable_users_query(
+        min_age: 70,
+        max_age: 90,
+        max_distance_in_meters: 10000
+      ).count
     end
 
     def create
       @campaign = @vaccination_center.campaigns.build(create_params)
       @campaign.partner = current_partner
+      @campaign.vaccine_type = create_params["vaccine_type"].downcase
       @campaign.max_distance_in_meters = create_params["max_distance_in_meters"].to_i * 1000
 
       if @campaign.save

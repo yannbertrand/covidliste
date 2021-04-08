@@ -1,0 +1,19 @@
+.pageTitle {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  margin-bottom: 70px;
+  &__icon {
+    background: $purple200;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 22px;
+    svg {
+      height: 48px;
+      fill: $purple500;
+    }
+  }
+}

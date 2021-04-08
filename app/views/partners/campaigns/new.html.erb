@@ -1,34 +1,125 @@
-<div class="container">
+<div class="container newCampaign">
   <div class="row">
-    <div class="col-12 col-sm-8 offset-sm-2">
-    <%= link_to "← Retour" , partners_vaccination_center_path(@vaccination_center) %>
-      <h1 class="mt-3">Nouvelle Campagne</h1>
-      <p>
-        Centre de vaccination:
-        <strong><%= @vaccination_center.name %></strong>
-      </p>
-      <p>Lorsque vous constatez qu’il vous restera des doses, créez une campagne Covidliste</p>
-      <%= simple_form_for([:partners, @vaccination_center, @campaign]) do |f| %>
-        <h2>Informations sur la campagne</h2>
-        <%= f.input :available_doses, label: "Nombre de doses à écouler", as: :integer, input_html: { min: "1", max: "1000" } %>
-        <%= f.input :vaccine_type, label: "Type de vaccin", collection: Vaccine::Brands::ALL %>
-        <h5>Plage horaire de disponibilité des vaccins</h5>
-        <div class="row">
-          <div class="col col-6">
-          <%= f.input :starts_at, as: :time, label: "Début" %> 
-          </div>
-          <div class="col col-6">
-          <%= f.input :ends_at, as: :time, label: "Fin" %> 
-          </div>
-          <%= f.input :extra_info, label: "Informations supplémentaires pour les volontaires", hint: "Accès, modalités... Les volontaires verront cette information avant de confirmer leur rendez-vous."  %>
+    <div class="pageTitle">
+      <div class="pageTitle__icon">
+        <svg viewBox="0 0 64 64">
+        <path d="M51.8,1.5c-4.2,0-7.7,2.1-9.8,5.3L15.7,9.4h-9C2.9,9.4,0,12.3,0,15.8v16.5c0,2.4,1.3,4.5,3.5,5.6L6.9,57
+          c0.8,3.2,4,5.6,7.4,5.6c2.4,0,4.5-1.1,6.1-2.9c1.3-1.6,1.9-3.7,1.3-5.6l-2.7-15.7l22.8,5C44.1,46.9,47.8,49,52,49
+          c6.6,0,12-5.3,12-12V13.1C63.7,6.8,58.4,1.5,51.8,1.5z M5.3,15.8c0-0.5,0.5-1.1,1.3-1.1h6.6v18.6H6.6c-0.8,0-1.3-0.5-1.3-1.1V15.8z
+          M16.2,56.4c-0.5,0.5-1.1,0.8-1.9,0.8c-1.1,0-1.9-0.8-2.1-1.3L9,38.6h4.5l2.9,16.7C16.5,55.6,16.5,56.2,16.2,56.4z M18.6,33.1V14.5
+          l21.2-2.1c0,0.3,0,0.8,0,1.1v23.9c0,0.3,0,0.3,0,0.5L18.6,33.1z M58.4,37.3c0,3.7-2.9,6.6-6.6,6.6c-3.7,0-6.6-2.9-6.6-6.6V13.4
+          c0-3.7,2.9-6.6,6.6-6.6c3.7,0,6.6,2.9,6.6,6.6V37.3z"/>
+        </svg>
+      </div>
+      <h1 class="pageTitle__text">
+        Vous constatez qu’il va vous rester des doses ? <br>
+        Créez une campagne pour recruter des volontaires.
+      </h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-8">
+      <%= simple_form_for([:partners, @vaccination_center, @campaign], html: {class: 'form', novalidate: true }, defaults: { label_html: { class: 'form-label' } }) do |f| %>
+        <div class="mb70">
+          <h2>Paramétrez votre campagne</h2>
+            <div class="form__row">
+              <%= f.input :available_doses, label: "Nombre de doses à écouler", as: :string, input_html: { min: "1", max: "1000", class: "newCampaign__doseCount" } %>
+              <%= f.input :vaccine_type, label: "Type de vaccin", input_html: { class: "form-select" }, collection: Vaccine::Brands::ALL.map { |s| s.capitalize } %>
+            </div>
+            <div class="newCampaign__timeRange">
+              <p class="form-label">Plage horaire de disponibilité des vaccins</p>
+              <div class="newCampaign__timeRange__row">
+                <p class="form-label">De</p>
+                <%= f.input :starts_at, as: :time, label: false %> 
+                <p class="form-label">à</p>
+                <%= f.input :ends_at, as: :time, label: false %> 
+              </div>
+            </div>
         </div>
-
-        <h5>Critères de sélection des volontaires</h5>
-        <%= f.input :min_age, label: "Âge minimum (inclus)", input_html: { min: "1", max: "130" } %>
-        <%= f.input :max_age, label: "Âge maximum (inclus)", input_html: { min: "1", max: "130" } %>
-        <%= f.input :max_distance_in_meters, label: "Distance maximum au centre (en km)", input_html: { min: "1" } %>
-        <%= f.button :submit, "Créer la campagne" %>
-        <% end %>
+        <div class="mb70">
+          <h2>Définissez les critères de sélection des volontaires</h2>
+          <div class="newCampaign__timeRange newCampaign__timeRange__age">
+            <p class="form-label">Âge <br>
+              <span class="form-sublabel">Nous vous invitons à respecter au maximum le calendrier vaccinal mis en place par le gouvernement</span>
+            </p>
+            <div class="newCampaign__timeRange__row">
+              <p class="form-label">De</p>
+              <%= f.input :min_age, as: :string, label: false, input_html: { min: "1", max: "130" } %>
+              <p class="form-label">à</p>
+              <%= f.input :max_age, as: :string, label: false, input_html: { min: "1", max: "130" } %>
+              <p class="form-label">ans</p>
+            </div>
+          </div>
+          <div class="newCampaign__timeRange newCampaign__timeRange__age">
+            <p class="form-label">Distance maximum du volontaire par rapport au centre de vaccination <br>
+              <span class="form-sublabel">Dans le but de lui permettre une plus grande réactivité</span>
+            </p>
+            <div class="newCampaign__timeRange__row">
+              <%= f.input :max_distance_in_meters, as: :string, label: false, input_html: { min: "1" } %>
+              <p class="form-label text-bold">km</p>
+            </div>
+          </div>
+        </div>
+        <div class="mb70">
+          <h2>Lancez la campagne</h2>
+          <p class="form-label">Covidliste, comment ça marche ?</p>
+          <img src="<%= asset_path 'campaign_process.png' %>" alt="" class="newCampaign__process">
+          <div class="alert alert-info">
+            <p>
+              Lancer la campagne va permettre à Covidliste de <strong>contacter par mail et SMS toutes les personnes inscrites correspondant aux critères sélectionnés</strong>.
+            </p>
+            <%= f.button :submit, "Lancer la campagne et notifier les #{@initial_estimate} personnes éligibles", id: "submit" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-4">
+      <div class="newCampaign__side">
+        <div class="newCampaign__reach">
+          <div class="newCampaign__reach__intro">
+           Selon les critères définis,
+          </div>
+          <div class="newCampaign__reach__number" id="reachNumber">
+           <%= @initial_estimate %>
+          </div>
+          <div class="newCampaign__reach__label">
+            volontaires inscrits sur Covidliste sont éligibles
+          </div>
+        </div>
+        <div class="newCampaign__reach_advice alert alert-success">
+          Pour anticiper les inscrits non disponibles, visez 4x plus d’éligibles que de doses ✅
+        </div>
+      </div>
     </div>
   </div>
 </div>
+<script>
+  const distanceElement = document.getElementById("campaign_max_distance_in_meters");
+  const ageMinElement = document.getElementById("campaign_min_age");
+  const ageMaxElement = document.getElementById("campaign_max_age");
+  const reachNumberElement = document.getElementById("reachNumber");
+  const submitElement = document.getElementById("submit");
+  const csrfToken = document.querySelector("[name='csrf-token']").content
+
+  const fetchReach = async () => {
+    const response = await fetch('/partners/vaccination_centers/1/campaigns/simulate_reach.json', {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "X-CSRF-Token": csrfToken,
+        "Content-Type": 'application/json'
+      },
+      body: JSON.stringify({min_age:ageMinElement.value, max_age: ageMaxElement.value, max_distance_in_meters: distanceElement.value*1000})
+    })
+    const {reach} = await response.json()
+    reachNumberElement.textContent = reach;
+    submitElement.value = `Lancer la campagne et notifier les ${reach} personnes éligibles`;
+  }
+
+  distanceElement.addEventListener("change", fetchReach);
+  ageMinElement.addEventListener("change", fetchReach);
+  ageMaxElement.addEventListener("change", fetchReach);
+
+
+
+</script>

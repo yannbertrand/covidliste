@@ -1,0 +1,52 @@
+.newCampaign {
+  &__doseCount {
+    width: 180px;
+  }
+  &__timeRange {
+    display: block;
+    &__row {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 26px;
+    }
+    &__age {
+      input {
+        width: 154px;
+      }
+    }
+  }
+  &__process {
+    width: calc(100% + 40px);
+    margin-left: -20px;
+    margin-bottom: 10px;
+  }
+  &__side {
+    display: flex;
+    gap: 40px;
+    flex-direction: column;
+    position: sticky;
+    top: 70px;
+  }
+  &__reach {
+    border-radius: 12px;
+    background: linear-gradient(161.18deg, #8c588f 0%, #2c1b2d 100%);
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.17);
+    padding: 38px 16px 28px 16px;
+    color: white;
+    text-align: center;
+    font-weight: 500;
+    &__intro {
+      font-size: 14px;
+    }
+    &__number {
+      font-size: 48px;
+      font-weight: bold;
+    }
+    &__label {
+      font-weight: bold;
+      font-size: 24px;
+    }
+  }
+}
