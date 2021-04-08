@@ -20,11 +20,12 @@ module Partners
 
     def new
       @campaign = @vaccination_center.campaigns.build(ends_at: 1.hour.from_now, min_age: 70, max_age: 95, max_distance_in_meters: 10, available_doses: 50, vaccine_type: "Pfizer")
-      @initial_estimate = @vaccination_center.reachable_users_query(
-        min_age: 70,
-        max_age: 90,
-        max_distance_in_meters: 10000
-      ).count
+      # @initial_estimate = @vaccination_center.reachable_users_query(
+      #   min_age: 70,
+      #   max_age: 90,
+      #   max_distance_in_meters: 10000
+      # ).count
+      @initial_estimate = ((((95 - 70) * 198.9982) + 10000 * 1.36273)/50).round
     end
 
     def create
@@ -42,12 +43,13 @@ module Partners
     end
 
     def simulate_reach
-      reach = @vaccination_center.reachable_users_query(
-        min_age: params[:min_age],
-        max_age: params[:max_age],
-        max_distance_in_meters: params[:max_distance_in_meters]
-      ).count
-      render json: {reach: reach}
+      # reach = @vaccination_center.reachable_users_query(
+      #   min_age: params[:min_age],
+      #   max_age: params[:max_age],
+      #   max_distance_in_meters: params[:max_distance_in_meters]
+      # ).count
+      reach = ((params[:max_age].to_i - params[:min_age].to_i) * 198.9982) + params[:max_distance_in_meters].to_i * 1.36273
+      render json: {reach: (reach / 50).round}
     end
 
     private

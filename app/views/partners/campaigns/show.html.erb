@@ -26,10 +26,10 @@
       </div>
       <div class="showCampaign__progress">
         <div class="showCampaign__progressLabel">
-          <em><%= @campaign.matches.confirmed.count %></em> doses attribuées / <%= @campaign.available_doses %>
+          <em id="doses"><%= @campaign.matches.confirmed.count %></em> doses attribuées / <%= @campaign.available_doses %>
         </div>
         <div class="progress">
-          <div class="progress-bar" style="width: <%= @campaign.matches.confirmed.count * 100 / @campaign.available_doses %>%;"></div>
+          <div id="progress" class="progress-bar" style="width: <%= @campaign.matches.confirmed.count * 100 / @campaign.available_doses %>%;"></div>
         </div>
       </div>
     </div>
@@ -38,7 +38,7 @@
         <i class="fas fa-envelope-open-text"></i>
       </div>
       <p>
-        <em><%= @campaign.matches.count %></em><br>
+        <em id="notified"><%= @campaign.matches.count %></em><br>
         volontaires notifiés
       </p>
     </div>
@@ -47,7 +47,7 @@
         <i class="fas fa-user-check"></i>
       </div>
       <p>
-        <em><%= @campaign.matches.confirmed.count %></em><br>
+        <em id="confirmed"><%= @campaign.matches.confirmed.count %></em><br>
         volontaires confirmés
       </p>
     </div>
@@ -76,15 +76,58 @@
         <th>Date de naissance</th>
       </tr>
     </thead>
-    <tbody>
-    <% @campaign.matches.confirmed.each do |match| %>
-    <% user = match.user %>
-    <tr>
-    <td><%= user.firstname %> <%= user.lastname %></td>
-    <th><%= user.phone_number %></th>
-    <td><%= user.birthdate.strftime("%d/%m/%Y") %></td>
-    </tr>
-    <% end %>
+    <tbody id="tbody">
+      <% @campaign.matches.confirmed.each do |match| %>
+      <% user = match.user %>
+        <tr>
+          <td><%= user.firstname %> <%= user.lastname %></td>
+          <th><%= user.phone_number %></th>
+          <td><%= user.birthdate.strftime("%d/%m/%Y") %></td>
+        </tr>
+      <% end %>
+      <tr style="display:none;" id="user">
+        <td>Renaud Dupont</td>
+        <th>0123456789</th>
+        <td>25/09/1941</td>
+      </tr>
     </tbody>
   </table>
 </div>
+
+<script>
+  const notifiedElement = document.getElementById("notified");
+  const confirmedElement = document.getElementById("confirmed");
+  const dosesElement = document.getElementById("doses");
+  const userElement = document.getElementById("user");
+  const progressElement = document.getElementById("progress");
+  const tbodyElement = document.getElementById("tbody");
+  let curConf = 1;
+  let maxConf = <%= @campaign.available_doses %>;
+  window.setTimeout(() => {
+    notifiedElement.textContent="31"
+  }, 2000);
+  window.setTimeout(() => {
+    notifiedElement.textContent="50"
+  }, 2856);
+  window.setTimeout(() => {
+    confirmedElement.textContent="1"
+    dosesElement.textContent="1"
+    userElement.style.display = 'table-row';
+    progressElement.style.width = '2%'
+    addConfirmed()
+  }, 4000);
+  const addConfirmed = () => {
+    window.setTimeout(() => {
+      if(curConf >= maxConf) return
+      if(curConf === 16) {
+        notifiedElement.textContent="73"
+      }
+      curConf ++;
+      confirmedElement.textContent=curConf
+      dosesElement.textContent=curConf
+      progressElement.style.width = `${curConf*2}%`
+      tbodyElement.innerHTML += `<tr><td>Nabil Nevoux</td><th>0123456789</th><td>25/09/1946</td></tr>`
+      addConfirmed()
+    }, Math.floor(Math.random() * 10000));
+  }
+</script>
