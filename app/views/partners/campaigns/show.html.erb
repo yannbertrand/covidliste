@@ -20,7 +20,7 @@
     </div>
   </div>
   <div class="row showCampaign__indicators mb70">
-    <div class="col-6 showCampaign__indicator showCampaign__indicator--progress">
+    <div class="showCampaign__indicator showCampaign__indicator--progress">
       <div class="showCampaign__indicator__icon">
         <i class="fas fa-syringe"></i>
       </div>
@@ -51,15 +51,15 @@
         volontaires confirmés
       </p>
     </div>
-    <%# <div class="showCampaign__indicator showCampaign__indicator--number">
+    <div class="showCampaign__indicator showCampaign__indicator--number">
       <div class="showCampaign__indicator__icon">
         <i class="fas fa-user-times"></i>
       </div>
       <p>
-        <em>220</em><br>
+        <em id="denied">0</em><br>
         volontaires indisponibles
       </p>
-    </div> %>
+    </div>
   
   </div>
     <h2 class="mb-4">Volontaires confirmés</h2>
@@ -101,6 +101,7 @@
   const userElement = document.getElementById("user");
   const progressElement = document.getElementById("progress");
   const tbodyElement = document.getElementById("tbody");
+  const deniedElement = document.getElementById("denied");
   let curConf = 1;
   let maxConf = <%= @campaign.available_doses %>;
   window.setTimeout(() => {
@@ -120,7 +121,8 @@
     window.setTimeout(() => {
       if(curConf >= maxConf) return
       if(curConf === 16) {
-        notifiedElement.textContent="73"
+        notifiedElement.textContent="83"
+        deniedElement.textContent="33"
       }
       curConf ++;
       confirmedElement.textContent=curConf
