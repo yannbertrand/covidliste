@@ -1,10 +1,16 @@
-// Define variables for your color scheme
+$blue500: #0089fb;
+$blue200: #d1f4ff;
+$purple200: #ede2ee;
+$purple500: #8c588f;
+$purple900: #2c1b2d;
+$green500: #58d1a5;
+$green200: #e2faf1;
+$red: #fd1015;
+$yellow: #ffc65a;
+$orange: #e67e22;
+$gray: #0e0000;
+$light-gray: #f4f4f4;
 
-// For example:
-$red: #FD1015;
-$blue: #167FFB;
-$yellow: #FFC65A;
-$orange: #E67E22;
-$green: #1EDD88;
-$gray: #0E0000;
-$light-gray: #F4F4F4;
+// Aliases
+$green: $green500;
+$blue: $blue500;
