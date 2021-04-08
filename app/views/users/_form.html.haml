@@ -8,6 +8,11 @@
           Merci ! Vous êtes bien enregistré sur Covidliste. Vous allez recevoir dans quelques instants un email de
           confirmation qui vous permettra de valider votre inscription et accéder à votre espace sécurisé. Le lien de confirmation sera valable pendant 24 heures.
     - else
+      - if @user.errors.any?
+        .alert.alert-danger{:role => "alert", style: "position: inherit"}
+          - @user.errors.full_messages.each do |msg|
+            #{msg}
+            %br/
       = simple_form_for @user do |f|
         = f.input :firstname, label: "Prénom", error: "Prénom requis", placeholder: "Jean", required: true
         = f.input :lastname, label: "Nom", error: "Nom requis", placeholder: "Dupont", required: true
