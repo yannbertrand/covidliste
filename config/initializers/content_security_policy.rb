@@ -37,6 +37,7 @@ Rails.application.config.content_security_policy do |policy|
   policy.style_src :self, :https, :unsafe_inline
   # Allow livereload
   if Rails.env.development?
+    policy.default_src :self, :https, :unsafe_inline, :unsafe_eval, "http://localhost:35729"
     policy.connect_src :self, :https, :unsafe_inline, :unsafe_eval, "ws://localhost:35729"
   end
 end
