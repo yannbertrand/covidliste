@@ -82,5 +82,5 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   # Load livereload script
-  config.middleware.insert_before Rack::Runtime, Rack::LiveReload
+  # config.middleware.insert_before Rack::Runtime, Rack::LiveReload
 end
