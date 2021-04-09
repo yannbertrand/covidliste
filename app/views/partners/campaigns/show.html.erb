@@ -105,10 +105,10 @@
   let curConf = 1;
   let maxConf = <%= @campaign.available_doses %>;
   window.setTimeout(() => {
-    notifiedElement.textContent="31"
+    notifiedElement.textContent=<%= (@campaign.available_doses/2)+2 %>
   }, 2000);
   window.setTimeout(() => {
-    notifiedElement.textContent="50"
+    notifiedElement.textContent=<%= @campaign.available_doses %>
   }, 2856);
   window.setTimeout(() => {
     confirmedElement.textContent="1"
@@ -121,7 +121,7 @@
     window.setTimeout(() => {
       if(curConf >= maxConf) return
       if(curConf === 16) {
-        notifiedElement.textContent="83"
+        notifiedElement.textContent=<%= @campaign.available_doses*2 %>
         deniedElement.textContent="33"
       }
       curConf ++;
